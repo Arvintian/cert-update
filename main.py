@@ -3,6 +3,12 @@ from tencent import main as tencent_main
 import yaml
 import sys
 
+USAGE = "Usage: main.py CONFIG_FILE_PATH"
+
+if len(sys.argv) < 2:
+    print(USAGE)
+    sys.exit(-1)
+
 CONFIG_FILE = sys.argv[1].strip()
 
 with open(CONFIG_FILE, 'r', encoding="utf-8") as f:
