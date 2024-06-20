@@ -1,0 +1,25 @@
+cert_path: "/tmp/workspace"
+cert_file_name: "tls.crt"
+cert_key_file_name: "tls.key"
+
+aliyun:
+  enabled: true
+  enabled_products:
+    - cdn
+    - dcdn
+  cdn:
+    - a.example.com
+  dcdn:
+    - b.example.com
+  access_key: "AccessKey ID"
+  access_token: "AccessKey Secret"
+
+tencent:
+  enabled: true
+  enabled_products:
+    - cdn
+  cdn:
+    - c.example.com
+  secret_id: "TENCENT_SECRET_ID"
+  secret_key: "TENCENT_SECRET_KEY"
+

@@ -1,0 +1,8 @@
+pyyaml>=6.0.1
+requests>=2.28.1
+aliyun-python-sdk-core>=2.15.1
+aliyun-python-sdk-cas>=20180713.post114
+aliyun-python-sdk-cdn>=3.8.8
+aliyun-python-sdk-dcdn>=2.2.19
+aliyun-python-sdk-live>=3.9.55
+tencentcloud-sdk-python>=3.0.1172
