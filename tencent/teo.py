@@ -1,32 +1,34 @@
 from typing import List
 from tencentcloud.common.credential import Credential
-from tencentcloud.cdn.v20180606 import cdn_client
-from tencentcloud.cdn.v20180606 import models as cdn_models
+from tencentcloud.teo.v20220901 import teo_client
+from tencentcloud.teo.v20220901 import models as teo_models
 from tencentcloud.ssl.v20191205 import ssl_client
 from tencentcloud.ssl.v20191205 import models as ssl_models
 import time
 import json
 
 
-def do_update(cred: Credential, domains: List[str], cert_name: str, cert_fullchain: str, cert_key: str):
+def do_update(cred: Credential, domains: List[dict], cert_name: str, cert_fullchain: str, cert_key: str):
     if not domains:
         return
     certificate_id = upload_certificate(cred, cert_name, cert_fullchain, cert_key)
-    client = cdn_client.CdnClient(cred, "")
-    req = cdn_models.UpdateDomainConfigRequest()
-    for domain in domains:
+    client = teo_client.TeoClient(cred, "")
+    req = teo_models.ModifyHostsCertificateRequest()
+    for item in domains:
+        zone_id, domain = item.get("zone_id"), item.get("domain")
         params = {
-            "Domain": domain,
-            "Https": {
-                "Switch": "on",
-                "CertInfo": {
+            "ZoneId": zone_id,
+            "Hosts": [domain],
+            "Mode": "sslcert",
+            "ServerCertInfo": [
+                {
                     "CertId": certificate_id
                 }
-            }
+            ]
         }
         req.from_json_string(json.dumps(params))
-        client.UpdateDomainConfig(req)
-        print("success update tencent cdn {} ssl cert {}".format(domain, cert_name))
+        client.ModifyHostsCertificate(req)
+        print("success update tencent teo {} ssl cert {}".format(domain, cert_name))
         time.sleep(1.5)
 
 

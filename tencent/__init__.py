@@ -2,6 +2,7 @@ from utils import random_str
 from tencentcloud.common import credential
 import datetime as dt
 from .cdn import do_update as do_cdn_update
+from .teo import do_update as do_teo_update
 
 
 def main(cfg: dict, cert_fullchain: str, cert_key: str):
@@ -11,3 +12,6 @@ def main(cfg: dict, cert_fullchain: str, cert_key: str):
 
     if 'cdn' in cfg['enabled_products']:
         do_cdn_update(cred, cfg.get("cdn", []), cert_name, cert_fullchain, cert_key)
+
+    if 'teo' in cfg['enabled_products']:
+        do_teo_update(cred, cfg.get("teo", []), cert_name, cert_fullchain, cert_key)
