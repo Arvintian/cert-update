@@ -18,8 +18,12 @@ tencent:
   enabled: true
   enabled_products:
     - cdn
+    - teo
   cdn:
     - c.example.com
+  teo:
+    - zone_id: zone-xxx
+      domain: d.example.com
   secret_id: "TENCENT_SECRET_ID"
   secret_key: "TENCENT_SECRET_KEY"
 
